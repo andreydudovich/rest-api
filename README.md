@@ -1,7 +1,11 @@
 # Run rest api webservice
 
-## Configure project
-npm init;
+## Add dependencies
+node ^12.13 must be installed
+
+npm install express
+
+npm install uuid
 
 ## Start web service
 npm run start

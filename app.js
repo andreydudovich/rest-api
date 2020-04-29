@@ -10,8 +10,8 @@ let BOOKS_SCHEMA = {
 }
 
 let DB = [
-    {name: 'Cosmos', author: 'Carl Sagan', year: '1980', available: 1, id: "1"},
-    {name: 'Cosmos', author: 'Carl Sagan', year: '1980', available: 1, id: "2"}
+    {name: 'Cosmos', author: 'Carl Sagan', year: '1980', available: 3, id: "1"},
+    {name: 'The long walk', author: 'Stephen King', year: '1979', available: 5, id: "2"}
 ]
 
 app.use(express.json())
@@ -38,13 +38,18 @@ app.get('/books/:id', (req, res) => {
 app.put('/books/:id', (req, res) => {
     const idx = DB.findIndex(c => c.id === req.params.id)
     DB[idx] = {...req.body, id: req.params.id}
-    res.json(DB[idx])
+    res.status(200).json(DB[idx])
 })
 
 //DELETE (remove book from library)
 app.delete('/books/:id', (req, res) => {
     DB = DB.filter(c => c.id !== req.params.id)
     res.status(200).json({message: "Book has been deleted"})
+})
+
+//check webservice is up
+app.get('/', (req, res) => {
+    res.status(200).json({message: "Server is UP"})
 })
 
 app.listen(4000, () => console.log("Server has been started on port 4000..."))
